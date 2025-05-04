@@ -68,36 +68,18 @@ def a_function_requiring_decoration():
 
 print(a_function_requiring_decoration.__name__)
 #------------------------------------------------------------------
-# Capture all the errors like Hero
-
-import traceback
-def capture_error(func, log_file="out.txt"):
-    def wrapper(*args, **kwargs):
-        try:
-            result = func(*args, **kwargs)
-        except Exception as error:
-            with open("out.txt", 'a') as open_file:
-                open_file.write(f"Error: {error}\n{traceback.format_exc()}")
-        else:
-            return result
-    return wrapper
-
-@capture_error
-def practice_sum(a=10,b=20):
-    return a+b+c
-
-practice_sum()
-
-#------------------------------------------------------------------
 # Multiple decorators
+from functools import wraps
 
 def uppercase_decorator(func):
+    @wraps(func)
     def wrapper():
         result = func()
         return result.upper()
     return wrapper
 
 def exclamation_decorator(func):
+    @wraps(func)
     def wrapper():
         result = func()
         return result + "!"
