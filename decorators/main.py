@@ -69,17 +69,14 @@ def a_function_requiring_decoration():
 print(a_function_requiring_decoration.__name__)
 #------------------------------------------------------------------
 # Multiple decorators
-from functools import wraps
 
 def uppercase_decorator(func):
-    @wraps(func)
     def wrapper():
         result = func()
         return result.upper()
     return wrapper
 
 def exclamation_decorator(func):
-    @wraps(func)
     def wrapper():
         result = func()
         return result + "!"
